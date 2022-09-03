@@ -11,8 +11,8 @@ package TPO1;
 public class Sumador implements Runnable{
     //Atributos
     String id;
-    static int SUMA_TOTAL = 0; //Deberia resetearse a 0 esta variable antes de terminar una ejecucion del programa 
-    static int REFERENCIA_ID = 0;
+    private static int SUMA_TOTAL = 0; //Deberia resetearse a 0 esta variable antes de terminar una ejecucion del programa 
+    private static int REFERENCIA_ID = 0;
     int[] arregloCompartido;
     int posIn, posFin;
     
@@ -21,11 +21,13 @@ public class Sumador implements Runnable{
         
         this.id = crearId();
         this.arregloCompartido = arr;
+        this.posFin = posFin;
+        this.posIn = posIn;
     }
     
     private String crearId(){
         //Crea el ID del hilo
-        String id = ("HILO-"+ Sumador.REFERENCIA_ID + 1);
+        String id = ("HILO-"+ Sumador.REFERENCIA_ID);
         Sumador.REFERENCIA_ID++;
         return id;
     }
@@ -35,10 +37,10 @@ public class Sumador implements Runnable{
         int sumaLocal = 0;
         
         for(int i = this.posIn; i <= this.posFin; i++){
-            System.out.println("posIn: "+ this.posIn + " posFin: "+ this.posFin);//DEBUG
+            //System.out.println("posIn: "+ this.posIn + " posFin: "+ this.posFin);//DEBUG
             sumaLocal = sumaLocal + this.arregloCompartido[i];
         }
-        System.out.println(sumaLocal);//DEBUG
+        System.out.println("(*) SUMA LOCAL DE "+ this.id +": "+ sumaLocal);//DEBUG
         
         return sumaLocal;
     }
@@ -51,6 +53,15 @@ public class Sumador implements Runnable{
     
     public String getId(){
         return this.id;
+    }
+    
+    public static void reSetSumaTotal(){
+        //Resetea a 0 la suma total
+        Sumador.SUMA_TOTAL = 0;
+    }
+    
+    public static int getSumaTotal(){
+        return Sumador.SUMA_TOTAL;
     }
     
     public void run(){
