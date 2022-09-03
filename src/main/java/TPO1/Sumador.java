@@ -35,8 +35,10 @@ public class Sumador implements Runnable{
         int sumaLocal = 0;
         
         for(int i = this.posIn; i <= this.posFin; i++){
+            System.out.println("posIn: "+ this.posIn + " posFin: "+ this.posFin);//DEBUG
             sumaLocal = sumaLocal + this.arregloCompartido[i];
         }
+        System.out.println(sumaLocal);//DEBUG
         
         return sumaLocal;
     }
@@ -47,10 +49,16 @@ public class Sumador implements Runnable{
         Sumador.SUMA_TOTAL = Sumador.SUMA_TOTAL + sumaLocal;  
     }
     
+    public String getId(){
+        return this.id;
+    }
+    
     public void run(){
         int sumaLocal;
         
         sumaLocal = Sumar();
         Sumador.sumarTotal(sumaLocal);
+        
+        System.out.println("(-) EJECUCION DE "+ this.id +" TERMINADA");
     }
 }
