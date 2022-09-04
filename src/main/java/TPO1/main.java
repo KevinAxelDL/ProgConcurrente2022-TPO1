@@ -14,6 +14,7 @@ import TPO1.TecladoIn;
 public class main {
 
     public static void main(String arg[]) {
+        System.out.println("---INICIO MAIN---");
         Thread[] hilosCreados;
 
         hilosCreados = crearHilos();
@@ -47,34 +48,47 @@ public class main {
 
         System.out.println("Ingrese la cantidad de hilos que desea: ");
         k = TecladoIn.readLineInt();//Cant. hilos
-
-        if (k <= 0 || k >= n) {
-            //Control: la cantidad de hilos debe ser k > 0 && k < n
-            k = n - 1;
-            System.out.println("ADVERTENCIA: Cantidad de hilos no valida, el programa determinara la cantidad");
-            System.out.println("VAL: "+ k +", "+ n);//DEBUG
+        
+        if (k <= 0 || k > n) {
+            //Control: la cantidad de hilos debe ser k > 0 && k <= n
+            k = n;
+            System.out.println("(!)ADVERTENCIA: Cantidad de hilos no valida, el programa determinara la cantidad");
         }
         
-        Thread[] hilosCreados = new Thread[k];//Arreglo con hilos, necesario en main
-        //El arreglo debe poder almacenar k hilos, por lo tant el tam. debe ser k
-        cantPosAsignadas =  (n - 1) / k;
+        System.out.println("HILOS: "+ k +", ELEMENTOS: "+ n);//DEBUG
+        
+        Thread[] hilosCreados = new Thread[k];
+        //Arreglo con hilos, necesario en main
+        //El arreglo debe poder almacenar k hilos
+        
+        cantPosAsignadas = (n / k) - 1;
+        //n posiciones divididas en k hilos 
+        //Se redondea hacia abajo
+        
+        if( n == k){
+            //Caso especial
+            //(Ver una mejor solucion)
+            cantPosAsignadas = 0;
+        }
+        
         posIni = 0;
-        posFin = cantPosAsignadas - 1;
+        posFin = cantPosAsignadas + posIni;
         
         //Se crean los hilos
         for (int i = 0; i < k; i++) {
-            Sumador obj = new Sumador(arrNum, posIni, posFin);//Se crea un objeto
-            posIni = posFin + 1;
-            posFin = posIni + cantPosAsignadas + 1;
-            if (posFin >= n ) {
+            if (posFin < n && i == k-1 ) {
                 //Caso final en el arreglo
                 posFin = n - 1;
+                System.out.println("DEBUG: "+ posIni +", "+ posFin);//DEBUG
             }
+            Sumador obj = new Sumador(arrNum, posIni, posFin);//Se crea un objeto
             Thread t1 = new Thread(obj);//Se crea el hilo
             t1.start();//se activa el hilo
-
             hilosCreados[i] = t1;
             System.out.println("(+) " + obj.getId() + " CREADO E INICIADO");
+            //
+            posIni = posFin + 1;
+            posFin = posIni + cantPosAsignadas;
         }
         return hilosCreados;
     }
