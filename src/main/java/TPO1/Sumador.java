@@ -25,7 +25,7 @@ public class Sumador implements Runnable{
         this.posIn = posIn;
     }
     
-    private String crearId(){
+    private synchronized String crearId(){
         //Crea el ID del hilo
         String id = ("HILO-"+ Sumador.REFERENCIA_ID);
         Sumador.REFERENCIA_ID++;
