@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TPO1;
+package TP3.Ej6;
 
-import TPO1.TecladoIn;
+import TP3.Ej6.TecladoIn;
 
 /**
  *

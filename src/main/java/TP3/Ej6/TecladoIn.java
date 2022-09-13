@@ -1,4 +1,4 @@
-package TPO1;
+package TP3.Ej6;
 
 import java.io.*;
 import java.util.*;
