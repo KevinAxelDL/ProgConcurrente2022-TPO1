@@ -105,7 +105,7 @@ public class Buque {
         
     }
 
-    //METODOS PARA BUQUE
+    //METODOS PARA CAPITAN
     public void ir() {
         try {
 
