@@ -5,23 +5,40 @@
  */
 package Temporal.Clases1;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author agust
  */
-public class Capitan implements Runnable{
+public class Capitan implements Runnable {
     // OBJETO ACTIVO
-    
+
     private Buque buque;
-    
-    public Capitan(Buque buque){
-        this.buque=buque;
+
+    public Capitan(Buque buque) {
+        this.buque = buque;
     }
-    
-    public void run(){
-        buque.ir();
-        buque.volver();
+
+    public void run() {
+        while (true) {
+            buque.ir();
+            
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Capitan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            buque.volver();
+            
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Capitan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    
-    
+
 }

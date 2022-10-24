@@ -14,15 +14,21 @@ import Herramientas.GeneradorIds;
 public class Main {
 
     public static void main(String[] args) {
-        int cantAutos = 11;//MODIFICABLE
+        
+        int cantAutos = 21;//MODIFICABLE
+        
         GeneradorIds genIdAutos = new GeneradorIds("AUTO");
-        Buque buque1 = new Buque("BUQUE");
-        Capitan cap1 = new Capitan("CAPITAN", buque1);
-
+        Buque buque1 = new Buque();
+        Capitan cap1 = new Capitan(buque1);
+        
+        
+        Thread t1 = new Thread(cap1);
+        t1.start();
         for (int i=0; i < cantAutos; i++){
             Auto auto = new Auto(genIdAutos.generarUnId(), buque1);
-            Thread t = new Thread(auto);
-            t.start();
+            Thread t2 = new Thread(auto);
+            t2.start();
         }
+        
     }
 }

@@ -21,18 +21,20 @@ public class Auto implements Runnable {
     }
 
     public void run() {
-        buque.subir();
+        buque.subir(id);
         this.subiendo();
-        buque.estacionar();
-        buque.bajar();
+        buque.estacionar(id);
+        buque.bajar(id);
         this.bajando();
-        buque.liberaRampa();
+        buque.liberaRampa(id);
 
     }
 
+    //
+    
     private void subiendo() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -40,7 +42,7 @@ public class Auto implements Runnable {
 
     private void bajando() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
