@@ -40,10 +40,9 @@ public class Despertador {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Despertador.class.getName()).log(Level.SEVERE, null, ex);
             }
-            /*
+            
             this.notify();//Avisa a un compañero que hora es
             System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
-            */
             
         }
         System.out.println("(<--) "+ t.getId() +" salio a trabajar");//DEBUG
