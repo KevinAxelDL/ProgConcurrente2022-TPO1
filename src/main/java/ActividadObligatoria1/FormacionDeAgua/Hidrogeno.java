@@ -23,14 +23,12 @@ public class Hidrogeno implements Runnable {
     }
     
     public void run(){
-        recipiente.hacerH(id);
-        /*
         try {
              Thread.sleep(1000);
          } catch (InterruptedException ex) {
              Logger.getLogger(Oxigeno.class.getName()).log(Level.SEVERE, null, ex);
          }
-         */
+        recipiente.hacerH(id);
     }
     
 }

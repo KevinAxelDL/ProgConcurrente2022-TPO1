@@ -23,22 +23,18 @@ public class Oxigeno implements Runnable {
     }
     
     public void run(){
+        try {
+             Thread.sleep(1000);
+         } catch (InterruptedException ex) {
+             Logger.getLogger(Oxigeno.class.getName()).log(Level.SEVERE, null, ex);
+         }
         recipiente.hacerO(id);
-        /*
         try {
-             Thread.sleep(1000);
+             Thread.sleep(2000);
          } catch (InterruptedException ex) {
              Logger.getLogger(Oxigeno.class.getName()).log(Level.SEVERE, null, ex);
          }
-         */
         recipiente.hacerAgua();
-        /*
-        try {
-             Thread.sleep(1000);
-         } catch (InterruptedException ex) {
-             Logger.getLogger(Oxigeno.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        */
     }
   
 }
