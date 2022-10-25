@@ -23,7 +23,8 @@ public class Despertador {
         horaAct++;
         horaAct = (int)(horaAct % 24);
         System.out.println("--- SON LAS "+ horaAct +" hs ---");
-        notifyAll();//Notifica a alguno de los trabajadores durmiendo
+        notify();//Notifica a alguno de los trabajadores durmiendo
+        //notifyAll();//Notifica a todos los trabajadores//DEBUG
     }
 
     // Metodos para Trabajador
@@ -35,15 +36,14 @@ public class Despertador {
             
             try {
                 this.wait();
-                System.out.println("(!!!) "+ t.getId() +" desperto!");//DEBUG
-
+                //System.out.println("(!!!) "+ t.getId() +" desperto!");//DEBUG
             } catch (InterruptedException ex) {
                 Logger.getLogger(Despertador.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            /*
             this.notify();//Avisa a un compañero que hora es
             System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
-            
+            */
             
         }
         System.out.println("(<--) "+ t.getId() +" salio a trabajar");//DEBUG
