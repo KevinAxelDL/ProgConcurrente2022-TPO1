@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ActividadObligatoria1.RelojAlarma;
+package ActividadObligatoria1.RelojAlarmaV2;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +23,7 @@ public class Despertador {
         horaAct++;
         horaAct = (int)(horaAct % 24);
         System.out.println("--- SON LAS "+ horaAct +" hs ---");
-        notify();//Notifica a alguno de los trabajadores durmiendo
-        //notifyAll();//Notifica a todos los trabajadores//DEBUG
+        notifyAll();//Notifica a todos los trabajadores
     }
 
     // Metodos para Trabajador
@@ -39,12 +38,7 @@ public class Despertador {
                 //System.out.println("(!!!) "+ t.getId() +" desperto!");//DEBUG
             } catch (InterruptedException ex) {
                 Logger.getLogger(Despertador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            this.notify();//Avisa a un compañero que hora es
-            System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
-            
-            
+            } 
         }
         System.out.println("(<--) "+ t.getId() +" salio a trabajar");//DEBUG
     }
