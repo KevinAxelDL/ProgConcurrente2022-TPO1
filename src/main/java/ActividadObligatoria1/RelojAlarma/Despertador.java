@@ -43,11 +43,6 @@ public class Despertador {
             
             this.notify();//Avisa a un compañero que hora es
             System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
-<<<<<<< HEAD
-            
-=======
->>>>>>> e9805741a11c743306cfccda18c0a3040858dfc6
-            
         }
         System.out.println("(<--) "+ t.getId() +" salio a trabajar");//DEBUG
     }
