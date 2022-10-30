@@ -11,27 +11,37 @@ import Herramientas.GeneradorIds;
  * @author KevinDL
  */
 public class Main {
+
     //IMPLEMENTACION CON MONITORES
     public static void main(String[] args) {
         int cantTrabajadores = 5;
         GeneradorIds genIdTrabajadores = new GeneradorIds("TRABAJADOR");
-        Despertador despertador = new Despertador();//Obj.Pasivo
-        Reloj reloj = new Reloj(despertador);//Obj.Activo
-        
-        //
-        Thread t1 = new Thread(reloj);
+
+        //1ra cama
+        Cama cama1 = new Cama(null);//Obj.Pasivo
+        Trabajador obj = new Trabajador(genIdTrabajadores.generarUnId(), cama1, generadorHorario());//Obj.Activo
+        System.out.println("(?) " + obj.getId() + " trabaja a las " + obj.getHoraTrabajo() + " hs");//DEBUG
+        Thread t1 = new Thread(obj);
         t1.start();
         
-        for(int i = 0; i < cantTrabajadores; i++){
-            Trabajador obj = new Trabajador(genIdTrabajadores.generarUnId(), despertador, generadorHorario());//Obj.Activo
-            System.out.println("(?) "+ obj.getId() +" trabaja a las "+ obj.getHoraTrabajo() +" hs");//DEBUG
-            Thread t2 = new Thread(obj);
+        //cantTrabajadores - 1 camas
+        for (int i = 0; i < cantTrabajadores - 1; i++) {
+            Cama cama2 = new Cama(cama1);//Obj.Pasivo
+            Trabajador obj2 = new Trabajador(genIdTrabajadores.generarUnId(), cama2, generadorHorario());//Obj.Activo
+            System.out.println("(?) " + obj2.getId() + " trabaja a las " + obj2.getHoraTrabajo() + " hs");//DEBUG
+            Thread t2 = new Thread(obj2);
             t2.start();
+            cama1 = cama2;//Proxima referencia
         }
+        
+        //
+        Reloj reloj = new Reloj(cama1);//Obj.Activo
+        Thread t3 = new Thread(reloj);
+        t3.start();
     }
-    
-    public static int generadorHorario(){
-        return ((int)(Math.random()*23));//24 hs disponibles
+
+    public static int generadorHorario() {
+        return ((int) (Math.random() * 23));//24 hs disponibles
     }
 
 }

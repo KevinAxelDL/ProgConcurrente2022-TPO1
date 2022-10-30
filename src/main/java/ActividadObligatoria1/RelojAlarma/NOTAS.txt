@@ -1,0 +1,5 @@
++ Problemas al tratar de hacer .notify() sobre el conjunto de espera de un monitor
+que no es el actual.
+
++ Problemas al coordinar el Reloj con la rutina de los trabajadores (no debe pasar
+a la siguiente hora hasta que el ultimo trabajador revise la hora)

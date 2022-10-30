@@ -12,19 +12,24 @@ import java.util.logging.Logger;
  *
  * @author agust
  */
-public class Despertador {
+public class Cama {
     //OBJETO PASIVO
+    //MONITOR
 
     private int horaAct = -1;
+    private Cama camaVecina;
+    
+    public Cama(Cama camaVecina){
+        this.camaVecina = camaVecina;
+    }
 
-    //Metodos para Reloj
+    //Metodos para Reloj 
     public synchronized void actualizaHora() {
 
         horaAct++;
         horaAct = (int)(horaAct % 24);
         System.out.println("--- SON LAS "+ horaAct +" hs ---");
-        notify();//Notifica a alguno de los trabajadores durmiendo
-        //notifyAll();//Notifica a todos los trabajadores//DEBUG
+        this.notify();//Notifica al trabajador mas cercano
     }
 
     // Metodos para Trabajador
@@ -38,11 +43,14 @@ public class Despertador {
                 this.wait();
                 //System.out.println("(!!!) "+ t.getId() +" desperto!");//DEBUG
             } catch (InterruptedException ex) {
-                Logger.getLogger(Despertador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Cama.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            this.notify();//Avisa a un compañero que hora es
-            System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
+            if(this.camaVecina != null){
+                //Si no es la ultima cama
+                camaVecina.notify();//Avisa a un compañero que hora es
+                System.out.println("(...) "+ t.getId() +" notifica a un comañero de la hora");//DEBUG
+            }
         }
         System.out.println("(<--) "+ t.getId() +" salio a trabajar");//DEBUG
     }

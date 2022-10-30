@@ -16,18 +16,18 @@ public class Trabajador implements Runnable {
 
     //OBJETO ACTIVO
     private int horaTrabajo;
-    private Despertador despertador;
+    private Cama cama;
     private String id;
 
-    public Trabajador(String id, Despertador despertador, int horaTrabajo) {
-        this.despertador = despertador;
+    public Trabajador(String id, Cama cama, int horaTrabajo) {
+        this.cama = cama;
         this.horaTrabajo = horaTrabajo;
         this.id = id;
     }
 
     public void run() {
         while (true) {
-            despertador.descansar(this);
+            cama.descansar(this);
             this.trabajar();
         }
     }

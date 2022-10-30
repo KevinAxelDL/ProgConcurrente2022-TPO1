@@ -14,16 +14,16 @@ import java.util.logging.Logger;
  */
 public class Reloj implements Runnable {
 
-    private Despertador despertador;
+    private Cama cama;
 
-    public Reloj(Despertador despertador) {
-        this.despertador = despertador;
+    public Reloj(Cama cama) {
+        this.cama = cama;
     }
 
     public void run() {
         while (true) {
             this.pasaHora();
-            despertador.actualizaHora();
+            cama.actualizaHora();
 
         }
     }
